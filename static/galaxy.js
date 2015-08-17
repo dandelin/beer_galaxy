@@ -3,6 +3,11 @@ function ready(){
 }
 
 function draw_galaxy(){
+  var overlay = $("<div class='overlay'> </div>");
+  var spinner = $("<div class='spinner'> </div>");
+  overlay.appendTo($("body"));
+  spinner.appendTo($("body"));
+
 	$.ajax({
 		url: '/api/full_json',
 		success: function(data){
@@ -85,6 +90,11 @@ function draw_galaxy(){
 					});
 					return tooltip.style("visibility", "hidden");
 				});
-		}
+		},
+
+    complete: function() {
+      overlay.remove();
+      spinner.remove();
+    }
 	})
 }
