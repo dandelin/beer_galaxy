@@ -5,12 +5,12 @@ import json
 
 app = Flask(__name__)
 api = Api(app)
-with open('vec_renewed.json') as fp:
+with open('vec_over1.json') as fp:
 	full_json = json.load(fp)
 
 split_by = lambda x: ' '.join(x.split('_BY_')[0].split('_')[1:]) + ' - ' + ' '.join(x.split('_BY_')[1].split('_'))
 
-full_json = [[split_by(e[0]), e[1], e[2], e[3]] for e in full_json if e[3] > 20]
+full_json = [[split_by(e[0]), e[1], e[2], e[3]] for e in full_json if e[3] > 10]
 print len(full_json)
 full_json = sorted(full_json, key=lambda x: -x[3])
 
