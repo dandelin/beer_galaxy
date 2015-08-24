@@ -2,6 +2,11 @@ body {
 	overflow: hidden;
 }
 
+#search {
+  position: absolute;
+  float: left;
+}
+
 .overlay {
   position: absolute;
   width: 100%;
