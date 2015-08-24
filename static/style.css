@@ -7,6 +7,12 @@ body {
   float: left;
 }
 
+footer {
+  position: absolute;
+  width: 50%;
+  float: right;
+}
+
 .overlay {
   position: absolute;
   width: 100%;
