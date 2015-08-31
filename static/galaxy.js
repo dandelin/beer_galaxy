@@ -30,7 +30,10 @@ function draw_galaxy(data){
 		.domain(rn_extext)
 		.range([1, 0.1])
 
-	var zoom = d3.behavior.zoom()
+	var zoom = d3.behavior.zoom().scaleExtent([1, 80])
+	var zf = d3.scale.linear()
+    .domain([10, 0.1])
+    .range([20, 80]);
 
 	var svg = d3.select('body')
 		.append('svg')
@@ -87,10 +90,16 @@ function draw_galaxy(data){
 			return tooltip.style("visibility", "hidden");
 		})
 		.on("click", function(d){
+      var zoom_factor = zf($(this).attr('r'));
+      var translate = (-parseInt($(this).attr('cx')) * zoom_factor + width/2.2) + ',' + (-parseInt($(this).attr('cy')) * zoom_factor + height/2.2);
+      var scale = zoom_factor;
+      zoom.translate(eval('[' + translate + ']'));
+      zoom.scale(scale);
+      svg.transition()
+        .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
 		  console.log(d[2]);
 		});
 
-	var zoom_factor = 20;
 
 	$('#search').autocomplete({
 		source: names,
@@ -100,8 +109,9 @@ function draw_galaxy(data){
 				.transition()
 				.attr('stroke', 'black')
 				.attr('stroke-width', '0.1px');
-			translate = (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cx')) * zoom_factor + width/2) + ',' + (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cy')) * zoom_factor + height/2)
-			scale = zoom_factor;
+      var zoom_factor = zf(svg.select('circle[name="' + ui.item.value + '"]').attr('r'));
+			var translate = (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cx')) * zoom_factor + width/2.2) + ',' + (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cy')) * zoom_factor + height/2.2);
+			var scale = zoom_factor;
 			zoom.translate(eval('[' + translate + ']'));
 			zoom.scale(scale);
 			svg.transition()
