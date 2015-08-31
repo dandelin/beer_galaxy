@@ -91,6 +91,9 @@ function draw_galaxy(data){
 		})
 		.on("click", function(d){
       var zoom_factor = zf($(this).attr('r'));
+      if(zoom_factor == zoom.scale()){
+        zoom_factor /= 5;
+      }
       var translate = (-parseInt($(this).attr('cx')) * zoom_factor + width/2) + ',' + (-parseInt($(this).attr('cy')) * zoom_factor + height/2);
       var scale = zoom_factor;
       zoom.translate(eval('[' + translate + ']'));
