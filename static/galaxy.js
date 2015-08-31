@@ -38,9 +38,6 @@ function draw_galaxy(data){
   function move(){
     var t = d3.event.translate,
         s = d3.event.scale;
-    t[0] = Math.min(width/2 * (s - 1), Math.max(width/2 * (1 - s), t[0]));
-    t[1] = Math.min(height/2 * (s - 1), Math.max(width/2 * (1 - s), t[1]));
-    zoom.translate(t);
     svg.attr('transform', 'translate(' + t + ')scale(' + s + ')');
   }
 
