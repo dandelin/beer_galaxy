@@ -91,7 +91,7 @@ function draw_galaxy(data){
 		})
 		.on("click", function(d){
       var zoom_factor = zf($(this).attr('r'));
-      var translate = (-parseInt($(this).attr('cx')) * zoom_factor + width/2.2) + ',' + (-parseInt($(this).attr('cy')) * zoom_factor + height/2.2);
+      var translate = (-parseInt($(this).attr('cx')) * zoom_factor + width/2) + ',' + (-parseInt($(this).attr('cy')) * zoom_factor + height/2);
       var scale = zoom_factor;
       zoom.translate(eval('[' + translate + ']'));
       zoom.scale(scale);
@@ -110,7 +110,7 @@ function draw_galaxy(data){
 				.attr('stroke', 'black')
 				.attr('stroke-width', '0.1px');
       var zoom_factor = zf(svg.select('circle[name="' + ui.item.value + '"]').attr('r'));
-			var translate = (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cx')) * zoom_factor + width/2.2) + ',' + (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cy')) * zoom_factor + height/2.2);
+			var translate = (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cx')) * zoom_factor + width/2) + ',' + (-parseInt(svg.select('circle[name="' + ui.item.value + '"]').attr('cy')) * zoom_factor + height/2);
 			var scale = zoom_factor;
 			zoom.translate(eval('[' + translate + ']'));
 			zoom.scale(scale);
