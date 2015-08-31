@@ -35,13 +35,20 @@ function draw_galaxy(data){
     .domain([10, 0.1])
     .range([20, 80]);
 
+  function move(){
+    var t = d3.event.translate,
+        s = d3.event.scale;
+    t[0] = Math.min(width/2 * (s - 1), Math.max(width/2 * (1 - s), t[0]));
+    t[1] = Math.min(height/2 * (s - 1), Math.max(width/2 * (1 - s), t[1]));
+    zoom.translate(t);
+    svg.attr('transform', 'translate(' + t + ')scale(' + s + ')');
+  }
+
 	var svg = d3.select('body')
 		.append('svg')
 		.attr('width', width)
 		.attr('height', height)
-		.call(zoom.on("zoom", function(){
-			svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
-		}))
+		.call(zoom.on("zoom", move)) 
 		.append('g');
 
 	var tooltip = d3.select("body")
